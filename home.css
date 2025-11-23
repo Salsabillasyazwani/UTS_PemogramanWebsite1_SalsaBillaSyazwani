@@ -1,0 +1,365 @@
+* {
+  text-transform: none !important;
+}
+/*Navbar*/
+.navbar {
+  background-color: #181717;
+  height: 55px;
+  margin: 20px;
+  border-radius: 16px;
+  padding: 0.4rem 1rem;
+  box-shadow: 0 2px 10px rgba(110, 108, 108, 0.08);
+}
+
+
+.navbar-brand {
+  font-weight: 600;
+  color: #ffffff;
+  font-size: 1.7rem;
+  transition: color 0.3s;
+}
+
+.navbar-brand:hover {
+  color: #7a7474;
+}
+
+.navbar-toggler {
+  border: none;
+  font-size: 1.25rem;
+}
+
+.navbar-toggler:focus,
+.btn-close:focus {
+  box-shadow: none;
+  outline: none;
+}
+.navbar-nav .nav-link.active,
+.navbar-nav .nav-link:focus {
+    background: none !important;
+    box-shadow: none !important;
+}
+
+
+.nav-link {
+  color: #aca6a6;
+  font-weight: 500;
+  position: relative;
+  transition: color 0.3s;
+}
+
+
+.nav-link.active {
+  color: #ffffff!important;;
+}
+.navbar .nav-link:hover {
+  color: #ffffff !important;; 
+}
+
+@media (min-width: 991px) {
+  .nav-link::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background-color: #444444;
+    visibility: hidden;
+    transition: 0.4s ease-in-out;
+  }
+
+  .nav-link:hover::before,
+  .nav-link.active::before {
+    width: 100%;
+    visibility: visible;
+  }
+}
+.nav-auth-btn {
+  width: 110px;
+  height: 38px;
+  border-radius: 30px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  border: none;
+  background: rgba(255, 255, 255, 0.35);
+  color: #fff;
+  transition: .3s ease;
+  backdrop-filter: blur(4px);
+}
+
+.nav-auth-btn:hover {
+  background: rgba(255, 255, 255, 0.55);
+  color: #000;
+}
+/*Halaman utama sebelum dan sesudah*/
+.hero-section {
+  background-image: url('gambar/gorden1.png');
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45); 
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 650px;
+  text-align: left;         
+  margin-left: 0%; 
+  padding-left: 4%;        
+  animation: fadeInUp 1.2s ease forwards;
+} 
+
+.brand-name  {
+  font-size: 3rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 2rem;
+  animation: fadeInUp 1s ease forwards;
+  color: #ffffff;
+  margin-bottom: 0.3rem
+}
+.hero-content h2 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  line-height: 1.3;
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
+  animation: fadeInUp 1.3s ease forwards;
+  color: #fff;
+}
+.tagline {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #ddd;
+  margin-bottom: 1.5rem;
+  animation: fadeInUp 1.6s ease forwards;
+}
+.hero-content .btn {
+  background-color: #1f1f1f;
+  color: #ffffff;
+  font-weight: 500;
+  border: none;
+  border-radius: 50px;
+  padding: 10px 28px;
+  transition: all 0.3s ease;
+  animation: fadeInUp 2.2s ease forwards;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: inline-block;
+}
+
+.hero-content .btn:hover {
+  background-color: #000000;
+  color: #fff;
+  transform: scale(1.05);
+}
+
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+}
+.about {
+  padding: 80px 0;
+}
+
+.about-img img {
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  object-fit: cover;
+}
+
+.about-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #000000;
+}
+
+.about-text h2 {
+  font-weight: 700;
+  margin-bottom: 20px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.about-text p {
+  line-height: 1.8;
+  font-size: 1rem;
+  color: #555;
+}
+.about .btn {
+  background-color: #201f1f;
+  color: #ffffff;
+  font-weight: 500;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 30px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(22, 22, 22, 0.1);
+  text-transform: uppercase;
+}
+
+.about .btn:hover {
+  background-color: #000000;
+  color: #fff;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+}
+
+.features {
+  margin-top: -100px; 
+  position: relative;
+  z-index: 3;
+}
+.services {
+  background: transparent; 
+  padding-top: 0;
+}
+
+/* atur box  icon*/
+.service-box {
+  background-color: #000000;
+  color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.service-box:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+
+/* atur icon*/
+.service-icon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto -30px;
+  border-radius: 50%;
+  background: rgb(161, 161, 161);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0);
+  position: relative;
+  top: -30px;
+  color: #1f1f1f;
+}
+.d-flex .btn {
+  width: 130px;
+  height: 40px;
+  border-radius: 40px;
+  font-weight: 500;
+  border: none !important;
+  background: rgba(255, 255, 255, 0.35) !important;
+  color: #fff !important;
+  transition: .3s ease;
+  backdrop-filter: blur(4px);
+}
+/*atur btn read dan learn*/
+.d-flex .btn:hover {
+  background: rgba(255, 255, 255, 0.55) !important;
+}
+
+.d-flex .btn.active {
+  background: #fff !important;
+  color: #222 !important;
+  font-weight: 600;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+}
+.btn-hero {
+  background-color: #0a0e1f;
+  color: #ffffff;
+  font-weight: 600;
+  padding: 8px 22px;
+  font-size: 0.9rem;
+  border-radius: 30px;
+  transition: 0.3s;
+}
+
+.btn-hero:hover {
+  background-color: #080808;
+  transform: scale(1.04);
+}
+
+/* Tombol profil di navbar */
+.profile-btn {
+  
+  color: #fdfcfc !important;
+  font-size: 1.3rem;
+  margin-left: 10px;
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+}
+
+/* Menu Dashboard Quick Menu*/
+.order-menu-section {
+  margin-top: 40px;
+}
+.order-menu {
+    margin-top: 50px;
+    padding-bottom: 20px;
+}
+.menu-item-box {
+  background: #000000;
+  border-radius: 18px;
+  padding: 20px 10px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.menu-item-box:hover {
+  transform: translateY(-5px);
+  background: #2b2b2b;
+}
+
+.menu-icon {
+  width: 60px;
+  height: 60px;
+  background: rgb(161, 161, 161);
+  border-radius: 50%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -40px;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+}
+
+.menu-icon i {
+  font-size: 28px;
+  color: #000;
+}
+
+.menu-text {
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 5px;
+}
