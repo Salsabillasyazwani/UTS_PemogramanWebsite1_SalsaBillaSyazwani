@@ -1,21 +1,37 @@
-<?php
+<?php 
 header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
+header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With");
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 header("Content-Type: application/json; charset=UTF-8");
 
+// CORS preflight
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     http_response_code(200);
+    echo json_encode(["message" => "OPTIONS OK"]);
     exit();
 }
-ini_set('display_errors', 0);
-error_reporting(E_ALL);
 
 require_once '../koneksi/connection.php';
 
+// Pastikan POST
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    echo json_encode(['success' => false, 'message' => 'Hanya POST yang diperbolehkan']);
+    exit();
+}
+
+// Baca action
 $action = $_POST['action'] ?? '';
 
+if ($action == '') {
+    echo json_encode(['success' => false, 'message' => 'Action kosong / tidak dikirim']);
+    exit();
+}
+
+// ======================================================
+// REGISTER
+// ======================================================
 if ($action == 'register') {
+
     $name     = $_POST['name'] ?? '';
     $username = $_POST['username'] ?? '';
     $email    = $_POST['email'] ?? '';
@@ -29,8 +45,9 @@ if ($action == 'register') {
     $password = password_hash($passInput, PASSWORD_DEFAULT);
 
     try {
-       
-        $check = $conn->prepare("SELECT * FROM user WHERE username = :username");
+
+        // Cek username
+        $check = $conn->prepare("SELECT id FROM user WHERE username = :username");
         $check->bindParam(':username', $username);
         $check->execute();
 
@@ -39,8 +56,9 @@ if ($action == 'register') {
             exit();
         }
 
-        // Insert Data
-        $stmt = $conn->prepare("INSERT INTO user (name, username, email, password) VALUES (:name, :username, :email, :password)");
+        // Insert data
+        $stmt = $conn->prepare("INSERT INTO user (name, username, email, password) 
+                                VALUES (:name, :username, :email, :password)");
         $stmt->bindParam(':name', $name);
         $stmt->bindParam(':username', $username);
         $stmt->bindParam(':email', $email);
@@ -53,11 +71,17 @@ if ($action == 'register') {
         }
 
     } catch(PDOException $e) {
-        echo json_encode(['success' => false, 'message' => 'DB Error: ' . $e->getMessage()]);
+        echo json_encode(['success' => false, 'message' => 'DB Error: '.$e->getMessage()]);
     }
+
+    exit();
 }
 
-else if ($action == 'login') {
+// ======================================================
+// LOGIN
+// ======================================================
+if ($action == 'login') {
+
     $username = $_POST['username'] ?? '';
     $password = $_POST['password'] ?? '';
 
@@ -65,35 +89,34 @@ else if ($action == 'login') {
         $stmt = $conn->prepare("SELECT * FROM user WHERE username = :username");
         $stmt->bindParam(':username', $username);
         $stmt->execute();
-        
-        // Cek apakah user ketemu
-        if ($stmt->rowCount() > 0) {
-            $user = $stmt->fetch(PDO::FETCH_ASSOC);
-            
-            // Verifikasi Password 
-            if (password_verify($password, $user['password'])) {
-                // Hapus password dari data yang dikirim balik agar aman
-                unset($user['password']); 
-                
-                echo json_encode([
-                    'success' => true, 
-                    'message' => 'Login Berhasil',
-                    'data'    => $user
-                ]);
-            } else {
-                echo json_encode(['success' => false, 'message' => 'Password salah']);
-            }
-        } else {
+
+        if ($stmt->rowCount() == 0) {
             echo json_encode(['success' => false, 'message' => 'Username tidak ditemukan']);
+            exit();
         }
 
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if (!password_verify($password, $user['password'])) {
+            echo json_encode(['success' => false, 'message' => 'Password salah']);
+            exit();
+        }
+
+        unset($user['password']);
+        echo json_encode(['success' => true, 'message' => 'Login berhasil', 'data' => $user]);
+
     } catch(PDOException $e) {
-        echo json_encode(['success' => false, 'message' => 'DB Error: ' . $e->getMessage()]);
+        echo json_encode(['success' => false, 'message' => 'DB Error: '.$e->getMessage()]);
     }
+
+    exit();
 }
 
+// ======================================================
+// UPDATE
+// ======================================================
+if ($action == 'update') {
 
-else if ($action == 'update') {
     $id       = $_POST['id'] ?? '';
     $name     = $_POST['name'] ?? '';
     $username = $_POST['username'] ?? '';
@@ -105,8 +128,8 @@ else if ($action == 'update') {
     }
 
     try {
-        // Cek username 
-        $check = $conn->prepare("SELECT * FROM user WHERE username = :username AND id != :id");
+        // Cek username duplikat
+        $check = $conn->prepare("SELECT id FROM user WHERE username = :username AND id != :id");
         $check->bindParam(':username', $username);
         $check->bindParam(':id', $id);
         $check->execute();
@@ -116,7 +139,7 @@ else if ($action == 'update') {
             exit();
         }
 
-        // Update Data
+        // Update data
         $stmt = $conn->prepare("UPDATE user SET name=:name, username=:username, email=:email WHERE id=:id");
         $stmt->bindParam(':name', $name);
         $stmt->bindParam(':username', $username);
@@ -124,27 +147,24 @@ else if ($action == 'update') {
         $stmt->bindParam(':id', $id);
 
         if ($stmt->execute()) {
-            // Ambil data terbaru untuk update localStorage di JS
+
+            // Ambil data baru
             $getData = $conn->prepare("SELECT id, name, username, email FROM user WHERE id = :id");
             $getData->bindParam(':id', $id);
             $getData->execute();
             $newData = $getData->fetch(PDO::FETCH_ASSOC);
 
-            echo json_encode([
-                'success' => true, 
-                'message' => 'Update profil berhasil',
-                'data'    => $newData
-            ]);
+            echo json_encode(['success' => true, 'message' => 'Update berhasil', 'data'=>$newData]);
         } else {
-            echo json_encode(['success' => false, 'message' => 'Gagal update database']);
+            echo json_encode(['success' => false, 'message' => 'Gagal update data']);
         }
 
     } catch(PDOException $e) {
-        echo json_encode(['success'=>false,'message'=>'DB Error: ' . $e->getMessage()]);
+        echo json_encode(['success'=>false,'message'=>'DB Error: '.$e->getMessage()]);
     }
+
+    exit();
 }
 
-else {
-    echo json_encode(['success' => false, 'message' => 'Action tidak valid atau kosong']);
-}
+echo json_encode(['success'=>false,'message'=>'Action tidak valid']);
 ?>
