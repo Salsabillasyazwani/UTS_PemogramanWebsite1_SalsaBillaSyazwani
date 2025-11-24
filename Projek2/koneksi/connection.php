@@ -11,6 +11,7 @@ try{
         $database_username,
         $database_password
     );
+    echo "Koneksi berhasil";
 
 } catch (PDOException $e) {
     echo "Koneksi gagal: " . $e->getMessage();

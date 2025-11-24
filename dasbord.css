@@ -1,0 +1,70 @@
+/* Styling Card Utama */
+.dashboard-card {
+    background-color: #212121; 
+    color: #ffffff;
+    border-radius: 15px;
+    min-height: 130px; /* sedikit dipendekkan */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* konten rata tengah */
+    text-align: center;
+    padding: 20px 10px;
+    position: relative;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3) !important;
+    transition: transform 0.2s;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Icon dibungkus lingkaran */
+.card-icon-wrapper {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    background-color: #3b3b3b; /* warna lingkaran icon */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+}
+
+/* Styling Icon Utama */
+.dashboard-card .card-icon-wrapper i {
+    font-size: 2rem;
+    color: #ffffff;
+}
+
+/* (Opsional) Ikon kecil jika masih digunakan */
+.dashboard-card .card-icon-wrapper .order-icon-small,
+.dashboard-card .card-icon-wrapper .history-icon-small,
+.dashboard-card .card-icon-wrapper .service-icon-small {
+    font-size: 1rem;
+    position: absolute;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Contoh posisi ikon kecil */
+.order-icon-small {
+    top: -3px;
+    right: -3px;
+}
+
+.history-icon-small {
+    top: -3px;
+    left: -3px;
+}
+
+.service-icon-small {
+    top: -3px;
+    right: -3px;
+}
+
+/* Judul Card */
+.card-title-text {
+    margin-bottom: 5px;
+    font-weight: 600;
+}
