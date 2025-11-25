@@ -65,6 +65,8 @@
 
 
 **5.Halaman detail informasi**
+
+
 -Ketika di navbar klik produk
 
   
@@ -76,7 +78,7 @@
 
 
 
--Ketika di klik icon profil muncul ke halaman rofil langsung
+-Ketika di klik icon profil muncul ke halaman profil langsung
   
  <img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/1f64c96d-02cd-4a1f-a51a-9802efdfcbd3" />
 
