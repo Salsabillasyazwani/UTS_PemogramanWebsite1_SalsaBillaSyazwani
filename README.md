@@ -13,6 +13,8 @@
 
 
 
+
+
 **2.Halaman registasi**
 
 
@@ -23,6 +25,8 @@
 
 
 <img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/ecc496ce-946f-4c2a-bac0-c05a5ea6c491" />
+
+
 
 
 
@@ -41,6 +45,9 @@
 
 
 
+
+
+
 **4.Halaman menu utama setelah login**
 
 <img width="1350" height="725" alt="image" src="https://github.com/user-attachments/assets/5c3b15e5-1e41-4f27-9a11-4442f0421b8b" />
@@ -55,8 +62,10 @@
 
 
 
+
+
 **5.Halaman detail informasi**
-  -Ketika di navbar klik produk
+-Ketika di navbar klik produk
 
   
 <img width="1356" height="615" alt="image" src="https://github.com/user-attachments/assets/4c3befe5-dc6b-47c5-a46b-0e7aedbad2ab" />
@@ -67,15 +76,22 @@
 
 
 
-  -Ketika di klik icon profil muncul ke halaman rofil langsung
+-Ketika di klik icon profil muncul ke halaman rofil langsung
   
  <img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/1f64c96d-02cd-4a1f-a51a-9802efdfcbd3" />
 
  
 
-    -Rubah data 
+
+
+-Rubah data 
     
 <img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/aca91931-f541-41eb-846e-98376938f71b" />
+
+
+
+
+
 
 
 
